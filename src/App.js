@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+
+// import PageNotFound from "./Pages/PageNotFound";
+import { routesHome, routesAdmin } from "./Routes";
+import HomeTemplate from "./Template/HomeTemplate";
+ 
+
+
 
 function App() {
+  const showMenuHome = routes => {
+    if (routes && routes.length > 0) {
+      return routes.map((item, index) => {
+        return (
+          <HomeTemplate
+            key={index}
+            exact={item.exact}
+            path={item.path}
+            Component={item.component}
+          />
+        );
+      });
+    }
+  };
+ 
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div>
+        
+        <Switch>
+          {showMenuHome(routesHome)}
+          
+
+          
+
+
+
+
+          {/* Trang Khong Co */}
+          {/* <Route path="" component={PageNotFound} /> */}
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
